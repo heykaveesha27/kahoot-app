@@ -7,9 +7,15 @@ HEADER = 64
 PORT = 5050
 FORMAT = 'utf-8'
 DISCONNECT_MESSAGE = "DISCONNECTED"
-SERVER = socket.gethostbyname(socket.gethostname())
-ADDR = (SERVER, PORT)
-DISCOVERY_PORT = 5051
+SERVER=socket.gethostbyname(socket.gethostname())
+ADDR=(SERVER,PORT)
+DISCOVERY_PORT=5051
+#SERVER = socket.gethostbyname(socket.gethostname())
+#SERVER = "0.0.0.0"
+ADDR = ('192.168.230.184', PORT)
+#ADDR = (SERVER, PORT)
+#DISCOVERY_PORT = 5051
+FIXED_SERVER_IP="192.168.230.184"
 score = 0
 msg_queue = queue.Queue()
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -44,13 +50,15 @@ def connect_to_server(name, password):
     if is_connected:
         return True
     try:
-        found = discover_server()
-        if not found:
-            print("[ERROR] Could not discover server on LAN.")
-            return False
-        addr = found
-        client.connect(addr)
+        #found = discover_server()
+        #if not found:
+        #    print("[ERROR] Could not discover server on LAN.")
+        #    return False
+        #addr = found
+        #client.connect(addr)
         # Send password first
+        addr=(FIXED_SERVER_IP,PORT)
+        client.connect(addr)
         send(f"PASS:{password}")
         raw_length = recv_exact(client, HEADER)
         if not raw_length:

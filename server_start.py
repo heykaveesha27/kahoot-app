@@ -9,7 +9,6 @@ ADDR = (SERVER, PORT)
 FORMAT = 'utf-8'
 DISONNECTED_MESSAGE = "DISCONNECTED"
 
-
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind(ADDR)
 
