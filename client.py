@@ -57,7 +57,7 @@ def connect_to_server(name, password):
         #addr = found
         #client.connect(addr)
         # Send password first
-        addr=(FIXED_SERVER_IP,PORT)
+        addr=(SERVER,PORT)
         client.connect(addr)
         send(f"PASS:{password}")
         raw_length = recv_exact(client, HEADER)
